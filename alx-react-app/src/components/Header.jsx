@@ -1,5 +1,5 @@
 
-function header(){
+function Header(){
     return(
         <header>
             <h1>My favorite Cites</h1>
