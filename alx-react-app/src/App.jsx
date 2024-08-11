@@ -31,7 +31,7 @@ function App() {
       </div>
       <WelcomeMessage />
       <Header />
-      <UserProfile name="Abena" age="28" bio="Loves working out and eating" />
+      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
       <MainContent />
       <Footer />
       <p className="read-the-docs">
