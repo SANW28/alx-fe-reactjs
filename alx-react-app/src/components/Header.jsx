@@ -1,5 +1,5 @@
 
-function Header(){
+function Header() {
     return(
         <header>
             <h1>My favorite Cites</h1>
@@ -7,4 +7,4 @@ function Header(){
     );
 }
 
-export default header;
+export default Header;
