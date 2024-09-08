@@ -1,19 +1,17 @@
-// src/App.js
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import RecipeList from './components/RecipeList';
-import RecipeDetails from './components/RecipeDetails';
-import AddRecipeForm from './components/AddRecipeForm';
 
-const App = () => {
+import { useRecipeStore } from '../recipeStore';
+
+const DeleteRecipeButton = ({ recipeId }) => {
+  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
+
+  const handleDelete = () => {
+    deleteRecipe(recipeId);
+  };
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<RecipeList />} />
-        <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
-        <Route path="/add-recipe" element={<AddRecipeForm />} />
-      </Routes>
-    </Router>
+    <button onClick={handleDelete}>Delete Recipe</button>
   );
 };
 
-export default App;
+export default DeleteRecipeButton;
+
