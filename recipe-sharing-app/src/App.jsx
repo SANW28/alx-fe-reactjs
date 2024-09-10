@@ -21,9 +21,9 @@ const App = () => {
                 <Route path="/recipes/:id" element ={<RecipeDetails />}/>
             </Routes>
         </Router>
-      <SearchBar/>
-      <FavoritesList/>
-      <RecommendationList/>
+      <SearchBar />
+      <FavoritesList />
+      <RecommendationList />
     </div>
  
   )
