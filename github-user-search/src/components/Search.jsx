@@ -6,7 +6,7 @@ const Search = ({ onSearch }) => {
     const [minRepos, setMinRepos] = useState('');
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target; // This captures the name and value from the input fields
         if (name === "username") setUsername(value);
         if (name === "location") setLocation(value);
         if (name === "minRepos") setMinRepos(value);
@@ -14,7 +14,7 @@ const Search = ({ onSearch }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSearch({ username, location, minRepos });
+        onSearch({ username, location, minRepos }); // Calls the function passed as prop with the search criteria
     };
 
     return (
@@ -52,3 +52,4 @@ const Search = ({ onSearch }) => {
 };
 
 export default Search;
+
