@@ -5,45 +5,51 @@ const Search = ({ onSearch }) => {
     const [location, setLocation] = useState('');
     const [minRepos, setMinRepos] = useState('');
 
+    // Handle input change for each field
     const handleInputChange = (e) => {
-        const { name, value } = e.target; // This captures the name and value from the input fields
-        if (name === "username") setUsername(value);
-        if (name === "location") setLocation(value);
-        if (name === "minRepos") setMinRepos(value);
+        const { name, value } = e.target;
+        if (name === 'username') setUsername(value);
+        if (name === 'location') setLocation(value);
+        if (name === 'minRepos') setMinRepos(value);
     };
 
+    // Handle form submission and call the onSearch prop
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSearch({ username, location, minRepos }); // Calls the function passed as prop with the search criteria
+        const query = `username:${username} location:${location} repos:>${minRepos}`;
+        onSearch(query); // Pass the constructed query to the parent component
     };
 
     return (
         <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-            <input 
-                type="text" 
+            {/* Username input */}
+            <input
+                type="text"
                 name="username"
-                value={username} 
-                onChange={handleInputChange} 
-                placeholder="Enter GitHub username" 
-                required 
+                value={username}
+                onChange={handleInputChange}
+                placeholder="Enter GitHub username"
                 className="p-2 border rounded"
             />
-            <input 
-                type="text" 
-                name="location" 
-                value={location} 
-                onChange={handleInputChange} 
-                placeholder="Enter Location" 
+            {/* Location input */}
+            <input
+                type="text"
+                name="location"
+                value={location}
+                onChange={handleInputChange}
+                placeholder="Enter Location"
                 className="p-2 border rounded"
             />
-            <input 
-                type="number" 
-                name="minRepos" 
-                value={minRepos} 
-                onChange={handleInputChange} 
-                placeholder="Minimum Repositories" 
+            {/* Minimum Repositories input */}
+            <input
+                type="number"
+                name="minRepos"
+                value={minRepos}
+                onChange={handleInputChange}
+                placeholder="Minimum Repositories"
                 className="p-2 border rounded"
             />
+            {/* Submit button */}
             <button type="submit" className="bg-blue-500 text-white p-2 rounded">
                 Search
             </button>
@@ -52,4 +58,5 @@ const Search = ({ onSearch }) => {
 };
 
 export default Search;
+
 
