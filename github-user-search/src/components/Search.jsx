@@ -1,109 +1,62 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService'; // Assuming you have this service set up
+import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
-    // State variables for form inputs, search results, loading, and error states
-    const [username, setUsername] = useState('');
-    const [location, setLocation] = useState('');
-    const [minRepos, setMinRepos] = useState('');
-    const [results, setResults] = useState([]); // Store search results
-    const [loading, setLoading] = useState(false); // Loading state
-    const [error, setError] = useState(''); // Error state
+  const [username, setUsername] = useState(''); // State for storing the username input
+  const [user, setUser] = useState(null); // State for storing fetched user data
+  const [loading, setLoading] = useState(false); // State for loading status
+  const [error, setError] = useState(''); // State for storing error messages
 
-    // Handle input changes for all input fields
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        if (name === 'username') setUsername(value);
-        if (name === 'location') setLocation(value);
-        if (name === 'minRepos') setMinRepos(value);
-    };
+  const handleInputChange = (event) => {
+    setUsername(event.target.value); // Capturing input value using event.target.value
+  };
 
-    // Handle form submission and fetch data
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true); // Start loading
-        setError(''); // Clear previous errors
+  const handleSearch = async (event) => {
+    event.preventDefault(); // Prevent form submission
 
-        try {
-            // Construct query using advanced search fields
-            const query = `${username ? `username:${username}` : ''} ${location ? `location:${location}` : ''} ${minRepos ? `repos:>${minRepos}` : ''}`;
-            
-            const data = await fetchUserData(query); // Fetch data using async/await
+    setLoading(true); // Start loading
+    setError(''); // Reset any previous error
+    setUser(null); // Clear previous user data
 
-            if (data.length > 0) {
-                setResults(data); // Store results in state
-            } else {
-                setError('Looks like we can’t find the user');
-            }
-        } catch (err) {
-            setError('Looks like we can’t find the user'); // Display error message on failure
-        } finally {
-            setLoading(false); // End loading
-        }
-    };
+    try {
+      const data = await fetchUserData(username); // Fetch user data using the username
+      setUser(data); // Set user data to state
+    } catch (err) {
+      setError("Looks like we can't find the user"); // Set error message if user not found
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
 
-    return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold">GitHub User Search</h1>
-            {/* Search form */}
-            <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-                {/* Username input */}
-                <input
-                    type="text"
-                    name="username"
-                    value={username}
-                    onChange={handleInputChange}
-                    placeholder="Enter GitHub username"
-                    className="p-2 border rounded"
-                />
-                {/* Location input */}
-                <input
-                    type="text"
-                    name="location"
-                    value={location}
-                    onChange={handleInputChange}
-                    placeholder="Enter location"
-                    className="p-2 border rounded"
-                />
-                {/* Minimum Repositories input */}
-                <input
-                    type="number"
-                    name="minRepos"
-                    value={minRepos}
-                    onChange={handleInputChange}
-                    placeholder="Minimum Repositories"
-                    className="p-2 border rounded"
-                />
-                {/* Submit button */}
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                    Search
-                </button>
-            </form>
-
-            {/* Display loading message */}
-            {loading && <p>Loading...</p>}
-
-            {/* Display error message */}
-            {error && <p className="text-red-500">{error}</p>}
-
-            {/* Display search results */}
-            <div className="mt-4">
-                {results.length > 0 && results.map((user) => (
-                    <div key={user.id} className="border p-4 mb-2 flex items-center">
-                        <img src={user.avatar_url} alt={user.login} className="w-16 h-16 rounded-full mr-4" />
-                        <div>
-                            <h2 className="text-lg font-semibold">{user.login}</h2>
-                            <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-                                View Profile
-                            </a>
-                        </div>
-                    </div>
-                ))}
-            </div>
+  return (
+    <div>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={username}
+          onChange={handleInputChange} // Handle input change
+          placeholder="Search for a GitHub user"
+        />
+        <button type="submit">Search</button>
+      </form>
+      {loading && <p>Loading...</p>} {/* Show loading message */}
+      {error && <p>{error}</p>} {/* Show error message if there's an error */}
+      {user && (
+        <div>
+          <h3>{user.login}</h3>
+          <img src={user.avatar_url} alt={user.login} width="100" />
+          <p>
+            <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+              View Profile
+            </a>
+          </p>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Search;
+
 
 
