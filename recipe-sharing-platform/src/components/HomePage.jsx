@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import data from '../data.json'; 
+import { Link } from 'react-router-dom';
 
 
 const HomePage = () => {
     const [recipes, setRecipes] = useState([]);
   
     useEffect(() => {
-      setRecipes(data); // Replace with actual fetch if needed later
+      setRecipes(data); 
     }, []);
   
     return (
