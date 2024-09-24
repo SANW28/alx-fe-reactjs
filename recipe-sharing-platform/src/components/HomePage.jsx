@@ -1,29 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import data from '../data.json'; 
-import { Link } from 'react-router-dom';
-
+import React from 'react';
+import { Link } from 'react-router-dom'; 
+import recipesData from '../data.json'; 
 
 const HomePage = () => {
-    const [recipes, setRecipes] = useState([]);
-  
-    useEffect(() => {
-      setRecipes(data); 
-    }, []);
-  
-    return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-        {recipes.map((recipe) => (
-          <div key={recipe.id} className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-            <img src={recipe.image} alt={recipe.title} className="w-full h-40 object-cover" />
-            <div className="p-4">
-              <h2 className="font-bold text-lg">{recipe.title}</h2>
-              <p>{recipe.summary}</p>
-            </div>
+  return (
+    <div className="max-w-4xl mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4">Recipe Sharing Platform</h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {recipesData.map((recipe) => (
+          <div key={recipe.id} className="border rounded-lg p-4 shadow-md">
+            <img src={recipe.image} alt={recipe.title} className="w-full h-auto mb-4 rounded-lg" />
+            <h2 className="text-2xl font-bold mb-2">{recipe.title}</h2>
+            <Link to={`/recipe/${recipe.id}`} className="text-blue-500 hover:underline">
+              View Recipe Details
+            </Link>
           </div>
         ))}
       </div>
-    );
-  };
-  
-  export default HomePage;
-  
+    </div>
+  );
+};
+
+export default HomePage;
