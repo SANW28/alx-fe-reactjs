@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserProfile = ({ user }) => {
   return (
-    <div className="max-w-xs sm:max-w-sm mx-auto p-4 sm:p-8">
+    <div className=" p-4 sm:p-8 max-w-xs sm:max-w-sm mx-auto">
       <div className="flex flex-col items-center">
         {/* Responsive Image */}
         <img
