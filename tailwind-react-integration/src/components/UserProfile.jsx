@@ -8,7 +8,7 @@ const UserProfile = ({ user }) => {
         <img
           src={user.profileImage}
           alt={user.name}
-          className="w-24 h-24 sm:w-36 sm:h-36 rounded-full object-cover mb-4"
+          className="sm:w-24 sm:h-24 md:w-36 md:h-36 rounded-full object-cover mb-4"
         />
         {/* Responsive Typography */}
         <h1 className="sm:text-lg md:text-xl font-bold text-gray-800">
