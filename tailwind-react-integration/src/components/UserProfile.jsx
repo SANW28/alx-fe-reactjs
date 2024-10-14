@@ -11,7 +11,7 @@ const UserProfile = ({ user }) => {
           className="sm:w-24 sm:h-24 md:w-36 md:h-36 rounded-full object-cover mb-4 hover:scale-110 transition-transform duration-300 ease-in-out"
         />
         {/* Responsive Typography */}
-        <h1 className="sm:text-lg md:text-xl font-bold text-gray-800 hover:text-blue-500">
+        <h1 className="text-xl text-blue-800 my-4 sm:text-lg md:text-xl font-bold hover:text-blue-500">
           {user.name}
         </h1>
         <p className="text-sm sm:text-base text-gray-600 text-center">
