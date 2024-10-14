@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserProfile = ({ user }) => {
   return (
-    <div className=" md:p-8 sm:p-4 sm:max-w-xs md:max-w-sm mx-auto hover:shadow-xl">
+    <div className=" bg-gray-100 my-20 rounded-lg shadow-lg md:p-8 sm:p-4 sm:max-w-xs md:max-w-sm mx-auto hover:shadow-xl">
       <div className="flex flex-col items-center">
         {/* Responsive Image */}
         <img
